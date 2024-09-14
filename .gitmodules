@@ -1,0 +1,21 @@
+[submodule "Insight/vendor/entt"]
+	path = Insight/vendor/entt
+	url = https://github.com/skypjack/entt.git
+[submodule "Portent/vendor/subprocess.h"]
+	path = Portent/vendor/subprocess.h
+	url = https://github.com/sheredom/subprocess.h.git
+[submodule "Portent/vendor/nativefiledialog-extended"]
+	path = Portent/vendor/nativefiledialog-extended
+	url = https://github.com/btzy/nativefiledialog-extended
+[submodule "Insight/vendor/base64"]
+	path = Insight/vendor/base64
+	url = https://github.com/tobiaslocker/base64.git
+[submodule "Insight/vendor/bytesize"]
+	path = Insight/vendor/bytesize
+	url = https://github.com/eudoxos/bytesize.git
+[submodule "Insight/vendor/tinyexr"]
+	path = Insight/vendor/tinyexr
+	url = https://github.com/syoyo/tinyexr.git
+[submodule "Portent/vendor/ImGuizmo"]
+	path = Portent/vendor/ImGuizmo
+	url = https://github.com/CedricGuillemet/ImGuizmo.git
