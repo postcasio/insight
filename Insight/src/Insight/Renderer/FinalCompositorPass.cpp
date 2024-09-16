@@ -233,7 +233,7 @@ namespace Insight::Renderer
             .Data = &pushConstants
         });
 
-        info.CommandBuffer.Draw(3, 1, 0, 0);
+        info.CommandBuffer.DrawFullscreenTriangle();
 
         info.CommandBuffer.EndRenderPass();
     }

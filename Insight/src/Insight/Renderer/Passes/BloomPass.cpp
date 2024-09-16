@@ -117,6 +117,9 @@ namespace Insight::Renderer
 
     void BloomPass::CreateResources()
     {
+        m_MipImages.clear();
+        m_MipViews.clear();
+
         const auto mips = std::min(7u, CalculateMipLevels(m_Extent.x, m_Extent.y));
 
         for (auto i = 0; i < mips; i++)
@@ -174,6 +177,10 @@ namespace Insight::Renderer
     {
         // Downsample
 
+        Command::SubmitResources(m_SamplerDescriptorSets);
+        Command::SubmitResources(m_MipImages);
+        Command::SubmitResources(m_MipViews);
+
         for (auto i = 0; i < m_MipCount; i++)
         {
             info.CommandBuffer.PipelineBarrier({
@@ -220,7 +227,7 @@ namespace Insight::Renderer
                 });
             }
 
-            info.CommandBuffer.Draw(3, 1, 0, 0);
+            info.CommandBuffer.DrawFullscreenTriangle();
 
             info.CommandBuffer.EndRendering();
 

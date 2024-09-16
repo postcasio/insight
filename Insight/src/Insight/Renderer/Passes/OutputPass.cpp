@@ -45,13 +45,13 @@ namespace Insight::Renderer
             .PolygonMode = vk::PolygonMode::eFill,
             .ShaderStages = {
                 {
-                    .Stage = vk::ShaderStageFlagBits::eVertex, .Module = *Renderer::Shader::Create({
+                    .Stage = vk::ShaderStageFlagBits::eVertex, .Module = *Shader::Create({
                         .Name = "Output (Vertex)",
                         .Path = "Engine/Shaders/FullscreenTriangle.vert.spv",
                     })
                 },
                 {
-                    .Stage = vk::ShaderStageFlagBits::eFragment, .Module = *Renderer::Shader::Create({
+                    .Stage = vk::ShaderStageFlagBits::eFragment, .Module = *Shader::Create({
                         .Name = "Output (Fragment)",
                         .Path = "Engine/Shaders/Output.frag.spv",
                     })
@@ -103,7 +103,7 @@ namespace Insight::Renderer
             .PipelineLayout = *m_PipelineLayout
         });
 
-        info.CommandBuffer.Draw(3, 1, 0, 0);
+        info.CommandBuffer.DrawFullscreenTriangle();
 
         info.CommandBuffer.EndRendering();
 

@@ -6,5 +6,7 @@
 #include <imgui_tables.cpp>
 #include <imgui_demo.cpp>
 
+#include <ImGuizmo.cpp>
+
 #include <backends/imgui_impl_glfw.cpp>
 #include <backends/imgui_impl_vulkan.cpp>

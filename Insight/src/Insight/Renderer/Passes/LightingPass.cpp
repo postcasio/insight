@@ -151,7 +151,7 @@ namespace Insight::Renderer
             .PipelineLayout = *m_PipelineLayout
         });
 
-        info.CommandBuffer.Draw(3, 1, 0, 0);
+        info.CommandBuffer.DrawFullscreenTriangle();
 
         info.CommandBuffer.EndRendering();
 

@@ -128,6 +128,7 @@ namespace Insight::Ui
         ImGui_ImplVulkan_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+        ImGuizmo::BeginFrame();
     }
 
     void Context::Render(const Renderer::CommandBuffer& commandBuffer) const

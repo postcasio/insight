@@ -10,5 +10,5 @@ void main() {
     OutAlbedo = vec4(texture(AlbedoSampler, FragTexCoord).xyz * 2.0, 1.0);
     OutPosition = vec4(FragPos, 1.0);
     OutNormal = vec4(0.0, 0.0, 1.0, 1.0);
-    OutOrm = vec4(1.0, 0.2, 0.0, 1.0);
+    OutOrm = vec4(1.0, 0.8, 0.0, 1.0);
 }

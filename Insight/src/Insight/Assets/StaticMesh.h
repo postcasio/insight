@@ -78,12 +78,12 @@ namespace Insight
         void DrawAllSubmeshes(const Renderer::CommandBuffer& commandBuffer) const;
 
     private:
-        string m_Name;
+        string m_Name{};
 
-        Ref<Renderer::Buffer> m_VertexBuffer;
-        Ref<Renderer::Buffer> m_IndexBuffer;
+        Ref<Renderer::Buffer> m_VertexBuffer{};
+        Ref<Renderer::Buffer> m_IndexBuffer{};
 
-        vector<StaticMeshSubmesh> m_Submeshes;
-        vector<Ref<Material>> m_Materials;
+        vector<StaticMeshSubmesh> m_Submeshes{};
+        vector<Ref<Material>> m_Materials{};
     };
 } // Insight

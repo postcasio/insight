@@ -219,7 +219,21 @@ add_library(imgui
 )
 
 target_include_directories(Insight PUBLIC ${imgui_external_SOURCE_DIR})
+FetchContent_Declare(imguizmo_external
+        URL https://github.com/CedricGuillemet/ImGuizmo/archive/refs/heads/master.tar.gz
+        EXCLUDE_FROM_ALL
+)
+FetchContent_MakeAvailable(imguizmo_external)
 
+add_library(imguizmo
+        ${imguizmo_external_SOURCE_DIR}/ImGuizmo.cpp
+        ${imguizmo_external_SOURCE_DIR}/ImGradient.cpp
+        ${imguizmo_external_SOURCE_DIR}/ImSequencer.cpp
+        ${imguizmo_external_SOURCE_DIR}/ImCurveEdit.cpp
+        ${imguizmo_external_SOURCE_DIR}/GraphEditor.cpp
+)
+
+target_include_directories(Insight PUBLIC ${imguizmo_external_SOURCE_DIR})
 
 function(add_shaders TARGET_NAME)
     set(SHADER_SOURCE_FILES ${ARGN}) # the rest of arguments to this function will be assigned as shader source files

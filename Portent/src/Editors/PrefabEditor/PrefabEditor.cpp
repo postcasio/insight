@@ -1,6 +1,8 @@
 #include "PrefabEditor.h"
 
+#include <Insight/Ui/ImGui.h>
 #include <imgui_internal.h>
+#include <Insight/Math.h>
 
 #include "ObjectProperties.h"
 #include "SceneExplorer.h"
@@ -108,6 +110,7 @@ namespace Portent::Editors
 
     void PrefabEditor::OnRenderContents()
     {
+        const auto offset = ImGui::GetCursorPos();
         const auto size = ImGui::GetContentRegionAvail();
         const uvec2 extent = {static_cast<uint32_t>(size.x), static_cast<uint32_t>(size.y)};
 
@@ -153,5 +156,29 @@ namespace Portent::Editors
         });
 
         Widgets::Image(m_RenderImage, size);
+
+        if (m_SelectedEntity.IsValid())
+        {
+            ImGuizmo::Enable(true);
+            ImGuizmo::SetDrawlist();
+            ImGuizmo::SetRect(offset.x, offset.y, size.x, size.y);
+
+            const auto& cameraComponent = m_EditorCamera.GetComponent<CameraComponent>();
+            const auto& transformComponent = m_EditorCamera.GetComponent<TransformComponent>();
+            const auto view = glm::inverse(transformComponent.GetTransform());
+            const auto& targetTransformComponent = m_SelectedEntity.GetComponent<TransformComponent>();
+
+            auto targetTransform = targetTransformComponent.GetTransform();
+            auto projection = cameraComponent.Projection;
+            projection[1][1] *= -1;
+            if (ImGuizmo::Manipulate(glm::value_ptr(view), glm::value_ptr(projection), ImGuizmo::OPERATION::UNIVERSAL, ImGuizmo::MODE::WORLD, glm::value_ptr(targetTransform)))
+            {
+                if (ImGuizmo::IsUsing())
+                {
+                    m_SelectedEntity.GetComponent<TransformComponent>().SetTransform(targetTransform);
+                }
+
+            }
+        }
     }
 }

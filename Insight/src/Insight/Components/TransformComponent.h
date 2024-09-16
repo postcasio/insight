@@ -31,6 +31,8 @@ namespace Insight
 
             // Convert the rotation matrix to a quaternion
             Quaternion = glm::quat(rotationMatrix);
+
+            Rotation = glm::eulerAngles(Quaternion);
         }
 
         void TranslateOnAxis(const glm::vec3 axis, const float distance)
@@ -64,6 +66,16 @@ namespace Insight
         void RotateZ(const float angle)
         {
             RotateOnAxis(glm::vec3(0.0f, 0.0f, 1.0f), angle);
+        }
+
+        void SetTransform(mat4 newTransform)
+        {
+            vec3 skew;
+            vec4 persp;
+
+            glm::decompose(newTransform, Scale, Quaternion, Position, skew, persp);
+
+            Rotation = glm::eulerAngles(Quaternion);
         }
     };
 }
