@@ -1,7 +1,6 @@
 #pragma once
 
 #include <entt/entt.hpp>
-
 #include "Scene.h"
 #include "Assert.h"
 
@@ -13,7 +12,7 @@ namespace Insight
     {
     public:
         Entity() = default;
-        Entity(const EntityHandle handle, Scene* scene) : m_Handle(handle), m_Scene(scene) {}
+        Entity(const EntityHandle handle, Scene* scene);
 
         template <typename T, typename... Args>
         T &AddComponent(Args &&...args) const

@@ -52,8 +52,8 @@ namespace Portent
         void RegisterInsightAssetImportWizards();
 
     private:
-        Unique<Project> m_Project;
-        Unique<EditorResources> m_Resources;
+        Unique<Project> m_Project = nullptr;
+        Unique<EditorResources> m_Resources = nullptr;
         vector<Unique<Importers::AssetImporter>> m_AssetImporters{};
         vector<Unique<Wizards::AssetImportWizard>> m_AssetImportWizards{};
 

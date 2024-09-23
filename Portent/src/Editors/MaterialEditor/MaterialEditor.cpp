@@ -145,7 +145,7 @@ namespace Portent::Editors
 
         Fs::WriteJsonFile(library.GetDirectory() / descriptor.Path, materialData);
 
-        INS_CLIENT_INFO("Wrote material data to {0}", descriptor.Path.c_str());
+        INS_INFO("Wrote material data to {0}", descriptor.Path.c_str());
     }
 
     void MaterialEditor::OnRenderContents()
@@ -235,7 +235,7 @@ namespace Portent::Editors
     {
         if (ImGui::IsMouseClicked(ImGuiMouseButton_Right))
         {
-            INS_CLIENT_INFO("Right mouse clicked");
+            INS_INFO("Right mouse clicked");
             const auto mousePos = ImGui::GetMousePos();
             const auto windowPos = ImGui::GetWindowPos();
             const auto panning = ImNodes::GetCurrentContext()->EditorCtx->Panning;
@@ -357,7 +357,7 @@ namespace Portent::Editors
         {
             if (compiler.Compile(m_Graph, m_OutputNode))
             {
-                INS_CLIENT_INFO("GLSL compilation successful: {0} bytes", compiler.GetShaderBinary().size());
+                INS_INFO("GLSL compilation successful: {0} bytes", compiler.GetShaderBinary().size());
                 m_ShaderBinary = compiler.GetShaderBinary();
                 m_TextureBindings = compiler.GetTextureBindings();
                 m_Uniforms = compiler.GetUniforms();
@@ -373,7 +373,7 @@ namespace Portent::Editors
         }
         catch (const std::exception& e)
         {
-            INS_CLIENT_ERROR("GLSL compilation failed: {0}", e.what());
+            INS_ERROR("GLSL compilation failed: {0}", e.what());
         }
     }
 
@@ -387,7 +387,7 @@ namespace Portent::Editors
         {
             if (binding.Texture == nullptr)
             {
-                INS_CLIENT_WARN("Not all textures are bound");
+                INS_WARN("Not all textures are bound");
                 return;
             }
 

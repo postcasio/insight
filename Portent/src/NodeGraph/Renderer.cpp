@@ -172,7 +172,7 @@ namespace Portent::NodeGraph
 
         if (ImNodes::IsLinkDestroyed(&destroyed))
         {
-            INS_CLIENT_INFO("Link destroyed: {0}", destroyed);
+            INS_INFO("Link destroyed: {0}", destroyed);
             m_Graph.RemoveLink(destroyed);
         }
 

@@ -4,8 +4,14 @@
 
 namespace Insight
 {
+    class Entity;
+
     struct DirectionalLightComponent
     {
+        static inline const Uuid ComponentId = Uuid {"8f63ffff-28d0-4193-b6d0-f3d2234cf13c"};
+        static inline const string ComponentName = "DirectionalLightComponent";
+        static void AddFunction(Entity* entity);
+
         vec3 Color = {1.0f, 1.0f, 1.0f};
         float Intensity = 1.0f;
         bool CastsShadows = false;

@@ -161,7 +161,7 @@ namespace Portent::Editors {
 
         Fs::WriteJsonFile(library.GetDirectory() / descriptor.Path, textureData);
 
-        INS_CLIENT_INFO("Wrote texture data to {0}", descriptor.Path.c_str());
+        INS_INFO("Wrote texture data to {0}", descriptor.Path.c_str());
     }
 
     void TextureEditor::Refresh()

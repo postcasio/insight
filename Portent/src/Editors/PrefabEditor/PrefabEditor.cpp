@@ -15,6 +15,7 @@
 #include "Insight/Components/TransformComponent.h"
 #include "Insight/Geometry/PlaneGeometry.h"
 #include "Insight/Renderer/Context.h"
+#include "Insight/Scripting/Scene.h"
 #include "Insight/Ui/Widgets.h"
 
 namespace Portent::Editors
@@ -101,6 +102,8 @@ namespace Portent::Editors
         {
             m_Scene = Scene::Create();
 
+            m_Scene->CreateRoot();
+
             CreateDefaultEntities();
         }
 
@@ -180,5 +183,12 @@ namespace Portent::Editors
 
             }
         }
+    }
+
+    void PrefabEditor::ScriptTrace(JSTracer* tracer)
+    {
+        EditorPanel::ScriptTrace(tracer);
+
+        m_Scene->ScriptTrace(tracer);
     }
 }

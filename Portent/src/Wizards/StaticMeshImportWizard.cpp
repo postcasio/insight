@@ -61,7 +61,7 @@ namespace Portent::Wizards
     {
         std::string name = std::string(node->mName.C_Str());
 
-        INS_CLIENT_INFO("Processing node {0}", name);
+        INS_INFO("Processing node {0}", name);
 
         for (uint32_t i = 0; i < node->mNumMeshes; i++)
         {
@@ -78,7 +78,7 @@ namespace Portent::Wizards
 
     void StaticMeshImportWizard::OnOpen(const path& assetPath)
     {
-        INS_CLIENT_INFO("Importing static mesh from {0}", assetPath.string());
+        INS_INFO("Importing static mesh from {0}", assetPath.string());
 
         Reset();
 

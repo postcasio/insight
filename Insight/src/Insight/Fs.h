@@ -32,6 +32,7 @@ namespace Insight
         static void CreateDirectory(const path& path);
         static bool FileExists(const path& path);
         static bool IsDirectory(const path& path);
+        static vector<Entry> Glob(const string& pattern);
 
     };
 }

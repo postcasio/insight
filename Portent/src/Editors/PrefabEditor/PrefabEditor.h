@@ -38,6 +38,8 @@ namespace Portent::Editors
         [[nodiscard]] Entity GetSelectedEntity() const { return m_SelectedEntity; }
         [[nodiscard]] bool IsEntitySelected() const { return m_SelectedEntity.IsValid(); }
 
+        void ScriptTrace(JSTracer* tracer) override;
+
     private:
         ImGuiID m_LeftId{};
         ImGuiID m_RightTopId{};

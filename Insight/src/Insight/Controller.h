@@ -58,6 +58,8 @@ public:
         m_Panels.clear();
     }
 
+    virtual void ScriptTrace(JSTracer* tracer);
+
 protected:
     string m_Name;
 

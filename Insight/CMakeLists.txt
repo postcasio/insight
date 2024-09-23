@@ -169,11 +169,52 @@ add_library(Insight SHARED src/Insight/Insight.h
         src/Insight/Renderer/PrefilteredEnvironmentRenderer.h
         src/Insight/Renderer/Passes/BloomPass.h
         src/Insight/Renderer/Passes/BloomPass.cpp
+        src/Insight/Scripting/ScriptHost.cpp
+        src/Insight/Scripting/ScriptHost.h
+        src/Insight/Scripting/JSEngineInit.h
+        src/Insight/Scripting/JSEngine.h
+        src/Insight/Scripting/Modules.cpp
+        src/Insight/Scripting/Modules.h
+        src/Insight/Scripting/NativeApi.cpp
+        src/Insight/Scripting/NativeApi.h
+        src/Insight/Scripting/Entity.cpp
+        src/Insight/Scripting/Entity.h
+        src/Insight/Scripting/EntityRegistry.cpp
+        src/Insight/Scripting/EntityRegistry.h
+        src/Insight/Scripting/Scene.cpp
+        src/Insight/Scripting/Scene.h
+        src/Insight/Components/ComponentRegistry.cpp
+        src/Insight/Components/ComponentRegistry.h
+        src/Insight/Components/CameraComponent.cpp
+        src/Insight/Components/DirectionalLightComponent.cpp
+        src/Insight/Components/EnvironmentComponent.cpp
+        src/Insight/Components/HierarchyComponent.cpp
+        src/Insight/Components/NameComponent.cpp
+        src/Insight/Components/PointLightComponent.cpp
+        src/Insight/Components/PrefabComponent.cpp
+        src/Insight/Components/StaticMeshComponent.cpp
+        src/Insight/Components/TransformComponent.cpp
+        src/Insight/Components/UuidComponent.cpp
+        src/Insight/Scripting/Components/TransformComponent.cpp
+        src/Insight/Scripting/Components/TransformComponent.h
+        src/Insight/Scripting/Components/StaticMeshComponent.h
+        src/Insight/Scripting/Components/StaticMeshComponent.cpp
+        src/Insight/Components/ScriptingComponent.cpp
+        src/Insight/Components/ScriptingComponent.h
 )
 
 find_package(Assimp REQUIRED)
 target_include_directories(Insight PUBLIC ${ASSIMP_INCLUDE_DIRS})
 target_link_libraries(Insight ${ASSIMP_LIBRARIES})
+
+
+# if macos
+if (APPLE)
+    target_include_directories(Insight PUBLIC /opt/homebrew/include/mozjs-128)
+    target_link_directories(Insight PUBLIC /opt/homebrew/lib)
+endif()
+
+target_link_libraries(Insight mozjs-128)
 
 find_package(Vulkan REQUIRED)
 
@@ -291,6 +332,8 @@ target_include_directories(Insight PUBLIC vendor/stb)
 target_include_directories(Insight PUBLIC vendor/tinyexr)
 target_include_directories(Insight PUBLIC vendor/imnodes)
 target_include_directories(Insight PUBLIC vendor/vma)
+target_include_directories(Insight PUBLIC vendor/glob/include)
+target_sources(Insight PUBLIC vendor/glob/source/glob.cpp)
 
 add_subdirectory(vendor/base64)
 target_include_directories(Insight PUBLIC vendor/base64/include)

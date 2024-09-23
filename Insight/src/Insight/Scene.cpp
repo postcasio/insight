@@ -10,9 +10,11 @@
 #include "Components/EnvironmentComponent.h"
 #include "Components/HierarchyComponent.h"
 #include "Components/PrefabComponent.h"
+#include "Components/ScriptingComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/TransformComponent.h"
 #include "Components/UuidComponent.h"
+#include "Scripting/Entity.h"
 
 namespace Insight
 {
@@ -30,12 +32,12 @@ namespace Insight
 
     Entity Scene::CreateEntity(const std::string& name)
     {
-        return CreateEntity(Uuid::CreateNew(), name);
+        return CreateEntity({ .Name = name });
     }
 
     Entity Scene::CreateEntity(const std::string& name, EntityHandle parent)
     {
-        return CreateEntity(Uuid::CreateNew(), name, parent);
+        return CreateEntity({ .Name = name, .Parent = parent });
     }
 
     Entity Scene::InstantiatePrefab(const Ref<Prefab>& prefab)
@@ -49,7 +51,7 @@ namespace Insight
 
     Entity Scene::CreateEntity(Uuid id, const std::string& name)
     {
-        return CreateEntity(id, name, m_Root);
+        return CreateEntity({ .Id = id, .Name = name });
     }
 
     Entity Scene::GetRoot()
@@ -57,20 +59,36 @@ namespace Insight
         return {m_Root, this};
     }
 
-    Entity Scene::CreateEntity(Uuid id, const std::string& name, EntityHandle parent)
+    Entity Scene::CreateEntity(Uuid id, const string& name, EntityHandle parent)
+    {
+        return CreateEntity(EntityInfo {
+            .Name = name,
+            .Id = id,
+            .Parent = parent
+        });
+    }
+
+    Entity Scene::CreateEntity(const EntityInfo& info)
     {
         Entity entity = {m_Registry.create(), this};
-        entity.AddComponent<UuidComponent>(id);
-        entity.AddComponent<NameComponent>(name.empty() ? "Entity" : name);
+        entity.AddComponent<UuidComponent>(info.Id);
+        entity.AddComponent<NameComponent>(info.Name);
+
         entity.AddComponent<TransformComponent>();
         entity.AddComponent<HierarchyComponent>();
 
-        if (parent != Entity::NullHandle)
+        EntityHandle parentHandle = info.Parent;
+        if (parentHandle == Entity::NullHandle && m_Root != Entity::NullHandle)
+        {
+            parentHandle = m_Root;
+        }
+
+        if (parentHandle != Entity::NullHandle)
         {
             auto& hierarchy = m_Registry.get<HierarchyComponent>(entity.GetHandle());
-            auto& parentHierarchy = m_Registry.get<HierarchyComponent>(parent);
+            auto& parentHierarchy = m_Registry.get<HierarchyComponent>(parentHandle);
 
-            hierarchy.Parent = parent;
+            hierarchy.Parent = parentHandle;
             hierarchy.PrevSibling = parentHierarchy.LastChild;
 
             if (parentHierarchy.LastChild == Entity::NullHandle)
@@ -82,9 +100,24 @@ namespace Insight
                 auto& lastChildHierarchy = m_Registry.get<HierarchyComponent>(parentHierarchy.LastChild);
                 lastChildHierarchy.NextSibling = entity.GetHandle();
             }
-
+g
             parentHierarchy.Children += 1;
             parentHierarchy.LastChild = entity.GetHandle();
+        }
+        else
+        {
+
+        }
+
+        auto &scriptingComponent = entity.AddComponent<ScriptingComponent>();
+
+        if (info.ScriptObject)
+        {
+            scriptingComponent.JSObject = info.ScriptObject;
+        }
+        else
+        {
+            scriptingComponent.JSObject = Scripting::ScriptEntity::Create(*this, entity.GetHandle());
         }
 
         return entity;
@@ -94,9 +127,23 @@ namespace Insight
     {
     }
 
+    void Scene::ScriptTrace(JSTracer* tracer)
+    {
+        JS::TraceEdge(tracer, &m_ScriptScene, "Scene");
+
+        m_Registry.view<ScriptingComponent>().each([tracer](auto entity, ScriptingComponent& scriptingComponent) mutable {
+           JS::TraceEdge(tracer, &scriptingComponent.JSObject, "ScriptingComponent.JSObject");
+        });
+    }
+
     Scene::Scene(const SceneInfo& info)
     {
-        CreateRoot();
+        INS_ENGINE_INFO("Scene()");
+    }
+
+    Scene::~Scene()
+    {
+        INS_ENGINE_INFO("~Scene()");
     }
 
     template <>
@@ -146,6 +193,11 @@ namespace Insight
 
     template <>
     void Scene::OnComponentAdded<EnvironmentComponent>(Entity entity, EnvironmentComponent& component)
+    {
+    }
+
+    template <>
+    void Scene::OnComponentAdded<ScriptingComponent>(Entity entity, ScriptingComponent& component)
     {
     }
 }

@@ -19,6 +19,7 @@ namespace Portent
         void Initialize() override;
         void RenderUi(Insight::Renderer::CommandBuffer& commandBuffer) override;
 
+
     private:
         Editor* m_Editor;
     };

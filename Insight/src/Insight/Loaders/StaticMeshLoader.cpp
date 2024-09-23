@@ -101,7 +101,7 @@ namespace Insight::Loaders
 
     void StaticMeshLoader::ProcessAssimpNode(aiNode* node, const aiScene* scene, vector<Renderer::Vertex3D>& vertices, vector<u32>& indices, vector<StaticMeshSubmesh>& submeshes)
     {
-        INS_CLIENT_INFO("Processing node {0}", node->mName.C_Str());
+        INS_ENGINE_INFO("Processing node {0}", node->mName.C_Str());
 
         for (uint32_t i = 0; i < node->mNumMeshes; i++)
         {

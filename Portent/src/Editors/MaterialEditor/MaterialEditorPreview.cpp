@@ -130,7 +130,7 @@ namespace Portent::Editors {
             m_ExtentChanging = false;
         }
 
-        // INS_CLIENT_INFO("Time: {0}", Time::GetFrameTime());
+        // INS_INFO("Time: {0}", Time::GetFrameTime());
 
         m_SceneRenderer.RenderScene({
             .CommandBuffer = Renderer::Context::Instance().GetCurrentFrame().GetCommandBuffer(),

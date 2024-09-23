@@ -4,8 +4,15 @@
 
 namespace Insight
 {
+    class Entity;
+
     struct PointLightComponent
     {
+        static inline const Uuid ComponentId = Uuid {"04ce881b-f310-453c-8416-886d7675dddd"};
+        static inline const string ComponentName = "PointLightComponent";
+        static void AddFunction(Entity* entity);
+        static inline const JSClass* JSClass = nullptr;
+
         vec3 Color = {1.0f, 1.0f, 1.0f};
         float Intensity = 1.0f;
         float Range = 1024.0f;

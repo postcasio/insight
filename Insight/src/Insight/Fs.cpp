@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <fmt/format.h>
+#include <glob/glob.h>
 
 namespace Insight
 {
@@ -88,5 +89,23 @@ namespace Insight
     bool Fs::IsDirectory(const path& path)
     {
         return std::filesystem::is_directory(path);
+    }
+
+    vector<Fs::Entry> Fs::Glob(const string& pattern)
+    {
+        vector<Entry> entries;
+
+        for (auto& p : glob::glob(pattern)) {                // e.g., .bash_history, .bashrc
+            Entry e;
+
+            e.Name = p.filename().string();
+            e.Path = p.string();
+            e.Extension = p.extension().string();
+            e.IsDirectory = Fs::IsDirectory(p);
+
+            entries.push_back(e);
+        }
+
+        return entries;
     }
 }

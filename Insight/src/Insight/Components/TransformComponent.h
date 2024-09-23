@@ -4,8 +4,14 @@
 
 namespace Insight
 {
+    class Entity;
+
     struct TransformComponent
     {
+        static inline const Uuid ComponentId = Uuid {"08a55aeb-f74c-49da-a9e3-d7efbbb0c757"};
+        static inline const string ComponentName = "TransformComponent";
+        static void AddFunction(Entity* entity);
+
         vec3 Position = {0.0f, 0.0f, 0.0f};
         quat Quaternion = {1.0f, 0.0f, 0.0f, 0.0f};
         vec3 Scale = {1.0f, 1.0f, 1.0f};

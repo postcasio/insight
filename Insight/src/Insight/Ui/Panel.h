@@ -4,6 +4,7 @@
 
 #include "ImGui.h"
 #include "../Insight.h"
+#include "../Scripting/JSEngine.h"
 
 namespace Insight
 {
@@ -79,6 +80,8 @@ namespace Insight
         [[nodiscard]] virtual string GetTitle() const { return m_Title; }
         [[nodiscard]] bool IsOpen() const { return m_Open; }
         [[nodiscard]] string GetDockSpaceClass() const { return m_DockSpaceClass; }
+
+        virtual void ScriptTrace(JSTracer* tracer);
 
     protected:
         string m_WindowClass = "Global";

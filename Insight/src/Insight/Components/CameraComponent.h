@@ -3,6 +3,8 @@
 
 namespace Insight
 {
+    class Entity;
+
     enum class ProjectionType
     {
         Perspective = 0,
@@ -11,6 +13,11 @@ namespace Insight
 
     struct CameraComponent
     {
+        static inline const Uuid ComponentId = Uuid {"191f1c27-1de7-488e-9250-4623cc4695ac"};
+        static inline const string ComponentName = "CameraComponent";
+
+        static void AddFunction(Entity* entity);
+
         mat4 Projection = mat4(1.0f);
         float NearPlane = 0.1f;
         float FarPlane = 32768;

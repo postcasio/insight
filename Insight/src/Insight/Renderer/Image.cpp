@@ -26,8 +26,6 @@ namespace Insight::Renderer
         m_Layouts.resize(m_MipLevels, vk::ImageLayout::eUndefined);
 
         DebugMarkers::MarkImage(m_VkImage, m_Name);
-
-        INS_ENGINE_INFO("Created image {0} ({1}x{2})", m_Name, m_Extent.x, m_Extent.y);
     }
 
     Image::Image(const ImageInfo& info) :
@@ -89,8 +87,6 @@ namespace Insight::Renderer
             m_Name.c_str());
 
         DebugMarkers::MarkImage(m_VkImage, m_Name);
-
-        INS_ENGINE_INFO("Created image {0} ({1}x{2})", m_Name, m_Extent.x, m_Extent.y);
     }
 
     Image::~Image()
@@ -109,8 +105,6 @@ namespace Insight::Renderer
             m_UiSampler.reset();
             m_UiImageView.reset();
         }
-
-        INS_ENGINE_INFO("Destroyed image {0}", m_Name);
     }
 
     ImTextureID Image::GetImTextureId()

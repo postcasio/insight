@@ -2,8 +2,11 @@
 
 #include "Controller.h"
 #include "Insight.h"
+#include "Scene.h"
+#include "Components/ComponentRegistry.h"
 #include "Windows/Window.h"
 #include "Renderer/Context.h"
+#include "Scripting/ScriptHost.h"
 #include "Ui/Context.h"
 
 namespace Insight
@@ -70,6 +73,19 @@ namespace Insight
             m_Controllers.clear();
         }
 
+        [[nodiscard]] u32 GetArgumentCount() const { return m_Arguments.size(); }
+        [[nodiscard]] const string &GetArgument(u32 index) const { return m_Arguments[index]; }
+        [[nodiscard]] Scripting::ScriptHost& GetScriptHost() { return m_ScriptHost; }
+        virtual void ScriptTrace(JSTracer* tracer)
+        {
+            for (auto& controller : m_Controllers)
+            {
+                controller->ScriptTrace(tracer);
+            }
+        }
+
+        [[nodiscard]] ComponentRegistry& GetComponentRegistry() { return m_ComponentRegistry; }
+
     protected:
         explicit Application(const ApplicationInfo &info) : m_Name(info.Name), m_Arguments(info.Arguments) {}
 
@@ -80,8 +96,6 @@ namespace Insight
         virtual void Update(float delta);
         virtual void Render();
 
-        [[nodiscard]] u32 GetArgumentCount() const { return m_Arguments.size(); }
-        [[nodiscard]] const string &GetArgument(u32 index) const { return m_Arguments[index]; }
 
 
     protected:
@@ -96,5 +110,8 @@ namespace Insight
         Renderer::Context m_Context {};
         Ui::Context m_UiContext {};
         vector<Unique<Controller>> m_Controllers{};
+        ComponentRegistry m_ComponentRegistry{};
+        Scripting::ScriptHost m_ScriptHost{};
+
     };
 }

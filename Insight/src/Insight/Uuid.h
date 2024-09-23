@@ -43,8 +43,6 @@ namespace Insight
 
             m_B = (b << 16) | (c & 0xFFFF);
             m_C = (d << 16) | (e & 0xFFFF);
-
-            INS_ENGINE_INFO("Parsed UUID: {0}", ToString());
         }
 
 

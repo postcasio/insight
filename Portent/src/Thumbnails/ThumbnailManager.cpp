@@ -108,7 +108,7 @@ namespace Portent::Thumbnails
             {
                 info = GenerateThumbnail(handle);
 
-                INS_CLIENT_INFO("Generating thumbnail for {0}", handle.ToString());
+                INS_INFO("Generating thumbnail for {0}", handle.ToString());
 
                 m_Thumbnails[handle] = info;
             }

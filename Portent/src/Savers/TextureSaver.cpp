@@ -26,6 +26,6 @@ namespace Portent::Savers {
 
         Fs::WriteJsonFile(library.GetDirectory() / options.Descriptor.Path, textureData);
 
-        INS_CLIENT_INFO("Wrote texture data to {0}", options.Descriptor.Path.c_str());
+        INS_INFO("Wrote texture data to {0}", options.Descriptor.Path.c_str());
     }
 }

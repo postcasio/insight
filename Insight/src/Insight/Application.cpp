@@ -27,6 +27,8 @@ namespace Insight
         m_UiContext.Initialize();
 
         Renderer::Command::Initialize();
+
+        m_ScriptHost.Initialize();
     }
 
     void Application::OnFrame()
@@ -48,6 +50,8 @@ namespace Insight
         {
             controller->OnUpdate(delta);
         }
+
+        m_ScriptHost.Update();
     }
 
     void Application::RenderUi(Renderer::CommandBuffer& commandBuffer)
@@ -73,6 +77,8 @@ namespace Insight
 
     void Application::Dispose()
     {
+        m_ScriptHost.Dispose();
+
         ClearControllers();
 
         Renderer::Command::Dispose();

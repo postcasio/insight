@@ -17,8 +17,6 @@ namespace Portent {
             LoadTexture("Editor/HDRI/DayEnvironmentHDRI015_2K-HDR.exr", false, vk::Format::eR32G32B32A32Sfloat),
             LoadTexture("Editor/HDRI/golden_bay_2k.exr", false, vk::Format::eR32G32B32A32Sfloat),
             LoadTexture("Editor/HDRI/studio_small_09_2k.exr", false, vk::Format::eR32G32B32A32Sfloat),
-            LoadTexture("Editor/HDRI/test.exr", false, vk::Format::eR32G32B32A32Sfloat),
-            LoadTexture("Editor/HDRI/zwartkops_straight_afternoon_2k.exr", false, vk::Format::eR32G32B32A32Sfloat),
             LoadTexture("Editor/HDRI/autumn_field_puresky_2k.exr", false, vk::Format::eR32G32B32A32Sfloat),
             LoadTexture("Editor/HDRI/kloofendal_48d_partly_cloudy_puresky_2k.exr", false, vk::Format::eR32G32B32A32Sfloat),
         };

@@ -66,7 +66,7 @@ namespace Portent
         }
         else
         {
-            INS_CLIENT_ERROR("Asset {0} not found in library!", assetPath.string());
+            INS_ERROR("Asset {0} not found in library!", assetPath.string());
         }
     }
 
@@ -84,7 +84,7 @@ namespace Portent
         }
         else
         {
-            INS_CLIENT_ERROR("No editor found for asset type {0}", GetAssetTypeName(descriptor.Type));
+            INS_ERROR("No editor found for asset type {0}", GetAssetTypeName(descriptor.Type));
         }
     }
 
@@ -182,7 +182,7 @@ namespace Portent
         }
         else
         {
-            INS_CLIENT_ERROR("Error: {0}", NFD_GetError());
+            INS_ERROR("Error: {0}", NFD_GetError());
             return false;
         }
     }
@@ -211,7 +211,7 @@ namespace Portent
         }
         else
         {
-            INS_CLIENT_ERROR("Error: {0}", NFD_GetError());
+            INS_ERROR("Error: {0}", NFD_GetError());
             return false;
         }
     }

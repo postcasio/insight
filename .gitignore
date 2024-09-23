@@ -1,5 +1,7 @@
 /Revelation/Library
+/Revelation/Scripts
 /Portent/Insight
 cmake-build-debug
 .DS_Store
 .idea
+node_modules

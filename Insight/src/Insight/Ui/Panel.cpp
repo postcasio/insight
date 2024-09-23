@@ -11,6 +11,14 @@ namespace Insight
     {
     }
 
+    void Panel::ScriptTrace(JSTracer* tracer)
+    {
+        for (const auto panel : m_Children)
+        {
+            panel->ScriptTrace(tracer);
+        }
+    }
+
     void Panel::RenderDockWindow()
     {
         ImGuiWindowClass dockSpaceClass;

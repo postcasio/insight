@@ -45,8 +45,8 @@ namespace Insight
 #define INS_ENGINE_CRITICAL(...) ::Insight::Log::GetEngineLog().critical(__VA_ARGS__)
 
 // Client log macros
-#define INS_CLIENT_TRACE(...) ::Insight::Log::GetClientLog().trace(__VA_ARGS__)
-#define INS_CLIENT_INFO(...) ::Insight::Log::GetClientLog().info(__VA_ARGS__)
-#define INS_CLIENT_WARN(...) ::Insight::Log::GetClientLog().warn(__VA_ARGS__)
-#define INS_CLIENT_ERROR(...) ::Insight::Log::GetClientLog().error(__VA_ARGS__)
-#define INS_CLIENT_CRITICAL(...) ::Insight::Log::GetClientLog().critical(__VA_ARGS__)
+#define INS_TRACE(...) ::Insight::Log::GetClientLog().trace(__VA_ARGS__)
+#define INS_INFO(...) ::Insight::Log::GetClientLog().info(__VA_ARGS__)
+#define INS_WARN(...) ::Insight::Log::GetClientLog().warn(__VA_ARGS__)
+#define INS_ERROR(...) ::Insight::Log::GetClientLog().error(__VA_ARGS__)
+#define INS_CRITICAL(...) ::Insight::Log::GetClientLog().critical(__VA_ARGS__)

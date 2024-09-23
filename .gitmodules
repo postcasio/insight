@@ -19,3 +19,6 @@
 [submodule "Portent/vendor/ImGuizmo"]
 	path = Portent/vendor/ImGuizmo
 	url = https://github.com/CedricGuillemet/ImGuizmo.git
+[submodule "Insight/vendor/glob"]
+	path = Insight/vendor/glob
+	url = https://github.com/p-ranav/glob.git

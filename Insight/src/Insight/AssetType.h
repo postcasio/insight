@@ -12,7 +12,9 @@ namespace Insight
         Material = 3,
         StaticMesh = 4,
         Prefab = 5,
-        Data = 6
+        Data = 6,
+        ScriptEntity = 7,
+        ScriptBehavior = 8
     };
 
     static inline constexpr AssetType s_AssetTypes[] = {

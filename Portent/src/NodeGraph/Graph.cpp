@@ -73,7 +73,7 @@ namespace Portent::NodeGraph
 
         if (!AreAttributesCompatible(inputAttribute, outputAttribute))
         {
-            INS_CLIENT_INFO("Type mismatch between attributes {0} and {1}", inputAttribute.GetName(),
+            INS_INFO("Type mismatch between attributes {0} and {1}", inputAttribute.GetName(),
                             outputAttribute.GetName());
 
             return;
@@ -82,7 +82,7 @@ namespace Portent::NodeGraph
 
         if (IsInputAttributeConnected(inputAttribute.GetId()))
         {
-            INS_CLIENT_INFO("This input already has a connection");
+            INS_INFO("This input already has a connection");
 
             for (auto i = 0; i < m_InputLinks.size(); i++)
             {

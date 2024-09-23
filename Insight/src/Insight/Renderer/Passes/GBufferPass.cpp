@@ -214,6 +214,12 @@ namespace Insight::Renderer
                                              StaticMeshComponent& mesh) mutable
             {
                 auto staticMesh = mesh.Mesh;
+
+                if (!staticMesh)
+                {
+                    return;
+                }
+
                 auto materialCount = staticMesh->GetMaterials().size();
 
                 Command::SubmitResource(staticMesh);

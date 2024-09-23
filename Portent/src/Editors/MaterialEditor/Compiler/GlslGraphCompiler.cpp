@@ -51,7 +51,7 @@ namespace Portent::Editors::MaterialEditorCompiler::GlslGraphCompiler
 
     vector<u8> GlslGraphCompiler::CompileSpirV(const string& glslSource)
     {
-        INS_CLIENT_INFO(glslSource);
+        INS_INFO(glslSource);
         const char* commandLine[] = {"/opt/homebrew/bin/glslc", "-IEngine/Shaders", "-fshader-stage=fragment", "-o", "-", "-", NULL};
         subprocess_s subprocess;
         int result = subprocess_create(commandLine, 0, &subprocess);
@@ -117,7 +117,7 @@ namespace Portent::Editors::MaterialEditorCompiler::GlslGraphCompiler
         const i32 id = m_Variables.size();
         string uniqueName = fmt::format("_v{0}_{1}", id, name);
         std::ranges::replace(uniqueName, ' ', '_');
-        INS_CLIENT_INFO("Create variable {0}: {1}", id, uniqueName);
+        INS_INFO("Create variable {0}: {1}", id, uniqueName);
 
         m_Variables.push_back({id, uniqueName, type});
         return id;
@@ -128,7 +128,7 @@ namespace Portent::Editors::MaterialEditorCompiler::GlslGraphCompiler
         const i32 id = m_Uniforms.size();
         string uniqueName = fmt::format("_u{0}_{1}", id, name);
         std::ranges::replace(uniqueName, ' ', '_');
-        INS_CLIENT_INFO("Create uniform {0}: {1}", id, uniqueName);
+        INS_INFO("Create uniform {0}: {1}", id, uniqueName);
 
         m_Uniforms.push_back({id, uniqueName, value});
         return id;
@@ -139,7 +139,7 @@ namespace Portent::Editors::MaterialEditorCompiler::GlslGraphCompiler
         const i32 id = m_SamplerBindings.size();
         string uniqueName = fmt::format("_s{0}_{1}", id, name);
         std::ranges::replace(uniqueName, ' ', '_');
-        INS_CLIENT_INFO("Create sampler binding {0}: {1}", id, uniqueName);
+        INS_INFO("Create sampler binding {0}: {1}", id, uniqueName);
 
         m_SamplerBindings.push_back({id, uniqueName, type});
         return id;
