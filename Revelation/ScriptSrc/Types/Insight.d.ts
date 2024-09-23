@@ -23,7 +23,7 @@ declare class Quaternion {
 }
 
 declare class TransformComponent {
-    static Id: string
+    static Id: string;
     static Name: string;
 
     Position: Vector3;
@@ -33,7 +33,7 @@ declare class TransformComponent {
 }
 
 declare class StaticMeshComponent {
-    static Id: string
+    static Id: string;
     static Name: string;
 }
 
@@ -46,8 +46,7 @@ declare class Entity {
     constructor(scene: Scene, name: string);
 
     AddComponent<T extends Component<unknown>>(component: T): InstanceType<T>;
-
-    GetComponent<T>(component: Component<T>): T;
+    GetComponent<T extends Component<unknown>>(component: T): InstanceType<T>;
 
     static RegisterInternal<T extends typeof Entity>(info: EntityRegisterInfo, entity: T): T;
     static Register<T extends typeof Entity>(info: EntityRegisterInfo): Entity.RegisterInternal<T>;
